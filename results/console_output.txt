@@ -1,0 +1,30 @@
+Part 1: simulating 12 months (2 Jan 2025 - 2 Jan 2026) ...
+Part 2: training the ML PV forecast on 2025 and testing on 2026 ...
+
+=== Data facts 2025 ===
+mean_spot_ct               8.93
+negative_price_hours     573.00
+min_spot_ct              -25.03
+max_spot_ct               58.34
+pv_yield_kwh_per_kwp   1,107.42
+household_load_kwh     6,962.67
+ev_kwh                 2,556.44
+mean_dynamic_buy_ct       30.86
+
+=== Part 1: 12 months, 2 Jan 2025 - 2 Jan 2026 ===
+                                                         annual_cost_eur  saving_vs_no_pv_eur  self_sufficiency  grid_import_kwh  grid_export_kwh  avg_import_price_ct  battery_cycles  unpaid_export_negative_price_kwh  ev_charged_at_night_share
+1 No PV, no battery (fixed tariff)                              3,144.47                 0.00              0.00         9,528.71             0.00                33.00            0.00                              0.00                       0.00
+2 PV only (fixed tariff)                                        1,819.44             1,325.03              0.27         6,963.54         8,510.05                33.00            0.00                          2,452.73                       0.00
+3 PV + battery, standard rule (fixed tariff)                    1,399.78             1,744.69              0.46         5,115.70         6,465.66                33.00          184.78                          2,347.23                       0.00
+4 PV + battery, standard rule (dynamic tariff)                  1,463.82             1,680.65              0.46         5,115.70         6,465.66                34.25          184.78                          2,347.23                       0.00
+5 Smart MILP control (dynamic tariff, simple forecast)          1,295.17             1,849.30              0.44         5,335.94         6,568.47                30.59          285.76                          1,575.54                       0.64
+6 Smart MILP control (dynamic tariff, perfect forecast)         1,095.80             2,048.68              0.53         4,499.06         5,731.39                30.61          286.52                          1,445.91                       0.63
+
+=== Part 2: 2 Jan - 30 Sep 2026 (out of sample) ===
+                                             cost_eur  pv_forecast_mae_kwh  self_sufficiency  avg_import_price_ct  battery_cycles
+Standard rule (dynamic tariff)                 781.26                  NaN              0.52                35.79          137.53
+Smart MILP, persistence forecast               614.75                 0.41              0.53                32.15          214.08
+Smart MILP, ML forecast (gradient boosting)    593.34                 0.38              0.55                32.23          214.62
+Smart MILP, perfect forecast                   468.32                 0.00              0.62                31.91          215.25
+
+Results written to /home/claude/home-energy-optimizer/results
