@@ -1,5 +1,17 @@
 # Home Energy Optimizer – Smart Battery & EV Charging on Real German Electricity Prices
 
+## Why I built this
+
+I wanted to understand how energy companies decide when a home battery or an
+electric car should charge. I downloaded one and a half years of real electricity
+prices from SMARD and weather data for Nürnberg, and compared a simple battery rule
+with an optimizer that plans one day ahead.
+
+What surprised me: a dynamic tariff on its own made the household pay more, not
+less. It only saves money when the charging reacts to the prices. I also learned
+how much a good solar forecast is worth in euros. Next, I would like to add the
+heat pump as a flexible load.
+
 When should a household with solar panels, a home battery, a heat pump and an electric car charge, discharge,
 buy and sell electricity? This project answers it with **real 2025–2026 German day-ahead prices** (SMARD,
 Bundesnetzagentur) and **real Nürnberg weather** (Open-Meteo). It compares the standard "self-consumption"
